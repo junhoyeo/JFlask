@@ -12,6 +12,7 @@ flask-principal = "*"
 flask-cors = "*"
 flask-jwt-extended = "*"
 flask-restplus = "*"
+flask-pymongo = "*"
 
 [requires]
 python_version = "3.7"
