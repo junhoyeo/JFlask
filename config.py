@@ -2,7 +2,7 @@ import os
 
 
 class Config(object):
-    SERVICE_NAME = 'Flask API'
+    SERVICE_NAME = 'Jflask'
 
     JWT_TOKEN_LOCATION = 'headers',
     JWT_HEADER_NAME = 'Authorization',
