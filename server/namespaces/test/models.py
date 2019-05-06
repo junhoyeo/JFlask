@@ -10,6 +10,6 @@ test_post_model = test_ns.model('TestPostModel', {
     'query': fields.String(required=True)
 })
 
-test_form_model = test_ns.model('TestUserModel', {
+test_form_model = test_ns.model('TestFormModel', {
     'query': fields.String(required=True)
 })
