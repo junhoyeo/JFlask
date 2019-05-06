@@ -1,4 +1,4 @@
-from flask_restplus import Namespace, Resource, fields
+from flask_restplus import Namespace
 
 test_ns = Namespace('test', description='API test')
 

@@ -8,3 +8,6 @@ api = Api(
 
 from server.namespaces.test import test_ns
 api.add_namespace(test_ns, path='/test')
+
+from server.namespaces.user import user_ns
+api.add_namespace(user_ns, path='/user')

@@ -7,7 +7,6 @@ from flask_jwt_extended import JWTManager
 import os
 
 from config import DevConfig
-from server.namespaces import api
 
 
 def create_app():
@@ -22,6 +21,9 @@ def create_app():
 
 
 app = create_app()
-api.init_app(app)
-common = Common(app)
 mongo = PyMongo(app)
+
+from server.namespaces import api
+api.init_app(app)
+
+common = Common(app)
