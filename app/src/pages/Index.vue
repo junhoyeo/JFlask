@@ -21,16 +21,23 @@ export default {
         .then((response) => {
           this.users = response.data
         })
+        .catch((error) => {
+          this.$toasted.error(error.response.data.message)
+        })
     },
 
     deleteUser (user) {
       this.$api.delete(`/user/${user._id}`)
         .then((response) => {
           if (response.status === 200) {
+            this.$toasted.show(`Deleted user with _id ${user._id}`)
             this.getUsers()
             this.recent = user
             delete this.recent._id
           }
+        })
+        .catch((error) => {
+          this.$toasted.error(error.response.data.message)
         })
     },
 
@@ -39,9 +46,13 @@ export default {
       this.$api.post('/user/register', this.create)
         .then((response) => {
           if (response.status === 200) {
+            this.$toasted.show(`Created new user`)
             this.getUsers()
             this.create = createUserModel
           }
+        })
+        .catch((error) => {
+          this.$toasted.error(error.response.data.message)
         })
     },
 
@@ -50,9 +61,13 @@ export default {
       this.$api.post('/user/recreate', this.recent)
         .then((response) => {
           if (response.status === 200) {
+            this.$toasted.show(`Recreated recently deleted user`)
             this.getUsers()
             this.recent = {}
           }
+        })
+        .catch((error) => {
+          this.$toasted.error(error.response.data.message)
         })
     }
   }
