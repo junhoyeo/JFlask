@@ -4,4 +4,4 @@ from server.namespaces import extend_namespace
 user_ns = Namespace('user', description='User resources')
 extend_namespace(user_ns)
 
-user_ns.add_resources('user', 'user_all', 'register')
+user_ns.add_resources('user', 'user_all', 'register', 'recreate')
