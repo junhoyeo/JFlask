@@ -1,8 +1,7 @@
 from flask_restplus import Namespace
+from server.namespaces import extend_namespace
 
 user_ns = Namespace('user', description='User resources')
+extend_namespace(user_ns)
 
-# resources
-import server.namespaces.user.resources.user
-import server.namespaces.user.resources.user_all
-import server.namespaces.user.resources.register
+user_ns.add_resources('user', 'user_all', 'register')

@@ -1,9 +1,7 @@
 from flask_restplus import Namespace
+from server.namespaces import extend_namespace
 
 test_ns = Namespace('test', description='API test')
+extend_namespace(test_ns)
 
-# models
-import server.namespaces.test.models
-
-# resources
-import server.namespaces.test.resources.test
+test_ns.add_resources('test')

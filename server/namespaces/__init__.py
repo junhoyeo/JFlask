@@ -1,4 +1,11 @@
+import types
 from flask_restplus import Api
+
+def extend_namespace(ns):
+    def add_resources(ns, *resources):
+        for resource in resources:
+            __import__('server.namespaces.{}.resources.{}'.format(ns.name, resource))
+    ns.add_resources = types.MethodType(add_resources, ns)
 
 api = Api(
     title='Jflask',
