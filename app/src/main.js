@@ -5,6 +5,8 @@ import router from './router'
 import axios from 'axios'
 import Toasted from 'vue-toasted'
 
+import './scss/style.scss'
+
 Vue.use(Toasted, {
   position: 'top-center',
   duration: 2000

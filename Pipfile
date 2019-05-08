@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 flask = "*"
 flask-common = "*"
-flask-principal = "*"
 flask-cors = "*"
 flask-jwt-extended = "*"
 flask-restplus = "*"
