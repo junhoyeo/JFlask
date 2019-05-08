@@ -1,3 +1,4 @@
+from flask import request
 from flask_restplus import Resource
 from flask_jwt_extended import create_access_token, create_refresh_token
 from server.namespaces import hash_password
@@ -13,6 +14,20 @@ class Auth(Resource):
         user = mongo.db.users.find_one_or_404({
             'name': auth_ns.payload['name'],
             'password': hash_password(auth_ns.payload['password'])
+        })
+        token = create_access_token(identity=str(user['_id']))
+        refresh_token = create_refresh_token(identity=str(user['_id']))
+        return {
+            'token': token,
+            'refresh_token': refresh_token
+        }
+
+@auth_ns.route('/plain')
+class AuthPlain(Resource):
+    def post(self):
+        user = mongo.db.users.find_one_or_404({
+            'name': auth_ns.payload['name'],
+            'password': auth_ns.payload['password']
         })
         token = create_access_token(identity=str(user['_id']))
         refresh_token = create_refresh_token(identity=str(user['_id']))

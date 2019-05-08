@@ -10,6 +10,7 @@ export default {
   data () {
     return {
       users: [],
+      tokens: [],
       create: createUserModel,
       recent: {}
     }
@@ -20,6 +21,7 @@ export default {
       this.$api.get('/user/all')
         .then((response) => {
           this.users = response.data
+          this.tokens = Array(this.users.length).fill('')
         })
         .catch((error) => {
           this.$toasted.error(error.response.data.message)
@@ -46,7 +48,7 @@ export default {
       this.$api.post('/user/register', this.create)
         .then((response) => {
           if (response.status === 200) {
-            this.$toasted.show(`Created new user`)
+            this.$toasted.show('Created new user')
             this.getUsers()
             this.create = createUserModel
           }
@@ -61,9 +63,28 @@ export default {
       this.$api.post('/user/recreate', this.recent)
         .then((response) => {
           if (response.status === 200) {
-            this.$toasted.show(`Recreated recently deleted user`)
+            this.$toasted.show('Recreated recently deleted user')
             this.getUsers()
             this.recent = {}
+          }
+        })
+        .catch((error) => {
+          this.$toasted.error(error.response.data.message)
+        })
+    },
+
+    copyUserToken (idx, user) {
+      this.$api.post('/auth/plain', {
+        name: user.name,
+        password: user.password
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            const token = response.data.token
+            this.$set(this.tokens, idx, token)
+            document.getElementById(`token-${idx}`).select()
+            document.execCommand('copy')
+            this.$toasted.show('Copied token to clipboard!')
           }
         })
         .catch((error) => {
@@ -85,7 +106,11 @@ export default {
         </p>
         <li class="user" v-for="(user, idx) in users" :key="idx">
           <pre>{{ user }}</pre>
-          <button class="button-delete" @click="deleteUser(user)">DELETE</button>
+          <div class="buttons">
+            <button class="button-delete" @click="deleteUser(user)">DELETE</button>
+            <button class="button-token" @click="copyUserToken(idx, user)">TOKEN</button>
+            <input :id="`token-${idx}`" v-model="tokens[idx]" size="50" readonly />
+          </div>
         </li>
         <div class="recreate" v-if="Object.keys(recent).length !== 0">
           <button class="button-recreate" @click="createRecent">RECREATE</button>
@@ -98,7 +123,7 @@ export default {
         <template v-for="(field, idx) in Object.keys(create)">
           <div class="create__field" :key="idx">
             <span>{{ field }}</span>
-            <input v-model="create[field]" @keyup.enter="createUser"/>
+            <input v-model="create[field]" @keyup.enter="createUser" />
           </div>
         </template>
         <button class="button-create" @click="createUser">CREATE</button>
@@ -132,6 +157,15 @@ section {
     border: 1px solid #3D59FE;
     background-color: #1E1F44;
     padding: 5px;
+  }
+
+  input {
+    color: lightgray;
+    background-color: #100D24;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    font-size: 0.8em;
+    margin-left: 0.5em;
   }
 }
 
@@ -189,5 +223,10 @@ button {
 .button-recreate {
   margin-top: 0.5em;
   background-color: #076FD7;
+}
+
+.button-token {
+  margin-left: 0.5em;
+  background-color: #3D59FE;
 }
 </style>
