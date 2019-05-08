@@ -1,5 +1,6 @@
 from flask_restplus import Resource
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token
+from server.namespaces import hash_password
 from server.namespaces.auth import auth_ns
 from server.namespaces.auth.models import auth_form_model, auth_token_model
 from server import mongo
@@ -11,9 +12,11 @@ class Auth(Resource):
     def post(self):
         user = mongo.db.users.find_one_or_404({
             'name': auth_ns.payload['name'],
-            'password': auth_ns.payload['password']
+            'password': hash_password(auth_ns.payload['password'])
         })
         token = create_access_token(identity=str(user['_id']))
+        refresh_token = create_refresh_token(identity=str(user['_id']))
         return {
-            'token': token
+            'token': token,
+            'refresh_token': refresh_token
         }

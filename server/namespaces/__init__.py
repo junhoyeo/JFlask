@@ -1,3 +1,5 @@
+import base64
+import hashlib
 import types
 from flask_restplus import Api
 
@@ -7,6 +9,11 @@ def extend_namespace(ns):
             __import__('server.namespaces.{}.resources.{}'.format(ns.name, resource))
     ns.add_resources = types.MethodType(add_resources, ns)
 
+def hash_password(password):
+    return base64.b64encode(hashlib.sha512(
+        password.encode('UTF-8')
+    ).digest()).decode()
+    
 api = Api(
     title='Jflask',
     version='1.0',

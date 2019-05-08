@@ -7,5 +7,6 @@ auth_form_model = auth_ns.model('AuthFormModel', {
 })
 
 auth_token_model = auth_ns.model('AuthTokenModel', {
-    'token': fields.String()
+    'token': fields.String(),
+    'refresh_token': fields.String(),
 })

@@ -2,10 +2,9 @@ from flask_restplus import Resource
 from server.namespaces.user import user_ns
 from server.namespaces.user.models import user_form_model
 
-import base64
-import hashlib
 from flask import jsonify, request
 from server import mongo
+from server.namespaces import hash_password
 
 @user_ns.route('/register')
 class Register(Resource):
@@ -15,9 +14,7 @@ class Register(Resource):
         description='새로운 사용자를 추가합니다.')
     def post(self):
         user = user_ns.payload
-        user['password'] = base64.b64encode(hashlib.sha512(
-            user['password'].encode('UTF-8')
-        ).digest()).decode()
+        user['password'] = hash_password(user['password'])
         result = mongo.db.users.insert_one(user)
         if not result.acknowledged:
             return {}, 500
