@@ -109,7 +109,7 @@ export default {
           <div class="buttons">
             <button class="button-delete" @click="deleteUser(user)">DELETE</button>
             <button class="button-token" @click="copyUserToken(idx, user)">TOKEN</button>
-            <input :id="`token-${idx}`" v-model="tokens[idx]" size="50" readonly />
+            <input :id="`token-${idx}`" v-model="tokens[idx]" placeholder="User Access Token" size="50" readonly />
           </div>
         </li>
         <div class="recreate" v-if="Object.keys(recent).length !== 0">
