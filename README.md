@@ -1,5 +1,5 @@
-# Jflask
-> ❄️ Jflask: Template for Flask RESTful API and management
+# JFlask
+> ❄️ JFlask: Template for Flask RESTful API and management
 
 ## Server
 >  RESTful API server with a systematic structure separated by resources for rapid development

@@ -15,7 +15,7 @@ def hash_password(password):
     ).digest()).decode()
     
 api = Api(
-    title='Jflask',
+    title='JFlask',
     version='1.0',
     description='Template for Flask RESTful API and management',
 )
