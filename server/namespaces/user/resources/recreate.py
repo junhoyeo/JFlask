@@ -11,7 +11,7 @@ class Recreate(Resource):
     @user_ns.expect(user_form_model, validate=True)    
     @user_ns.doc(
         responses={200: '성공', 400: '잘못된 요청', 500: 'Unacknowledged'},
-        description='이전의 사용자 오브젝트를 import합니다.')
+        description='이전의 사용자 오브젝트를 그대로 추가합니다.')
     def post(self):
         user = user_ns.payload
         result = mongo.db.users.insert_one(user)
