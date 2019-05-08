@@ -8,7 +8,7 @@ from server import mongo
 
 @user_ns.route('/recreate')
 class Recreate(Resource):
-    @user_ns.expect(user_form_model, validate=True)    
+    @user_ns.expect(user_form_model, validate=True)
     @user_ns.doc(
         responses={200: '성공', 400: '잘못된 요청', 500: 'Unacknowledged'},
         description='이전의 사용자 오브젝트를 그대로 추가합니다.')

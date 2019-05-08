@@ -11,7 +11,7 @@ from config import DevConfig
 
 def create_app():
     _app = Flask(__name__)
-    
+
     CORS().init_app(_app)
     Principal().init_app(_app)
     JWTManager().init_app(_app)

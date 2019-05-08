@@ -2,6 +2,7 @@ from flask_restplus import Resource
 from server.namespaces.test import test_ns
 from server.namespaces.test.models import *
 
+
 @test_ns.route('/')
 class Test(Resource):
     @test_ns.marshal_with(test_get_model)

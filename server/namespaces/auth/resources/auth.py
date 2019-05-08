@@ -6,6 +6,7 @@ from server.namespaces.auth import auth_ns
 from server.namespaces.auth.models import auth_form_model, auth_token_model
 from server import mongo
 
+
 @auth_ns.route('/')
 class Auth(Resource):
     @auth_ns.marshal_with(auth_token_model)
