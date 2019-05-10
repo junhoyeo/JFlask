@@ -1,6 +1,7 @@
 import base64
 import hashlib
 import types
+from functools import wraps
 from flask_restplus import Api
 
 
@@ -12,6 +13,16 @@ def extend_namespace(ns):
                     ns.name, resource))
     ns.add_resources = types.MethodType(add_resources, ns)
 
+    def validate(ns, key, validator):
+        def real_decorator(function):
+            @wraps(function)
+            def wrapper(*args, **kwargs):
+                if not validator(ns.payload[key]):
+                    return { 'message': "'{}' field validation failed".format(key) }, 400
+                return function(*args, **kwargs)
+            return wrapper
+        return real_decorator
+    ns.validate = types.MethodType(validate, ns)
 
 def hash_password(password):
     return base64.b64encode(hashlib.sha512(
