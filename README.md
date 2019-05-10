@@ -25,9 +25,30 @@ namespaces
 
 - `server.namespaces` 아래에는 API의 각 `Namespace`(네임스페이스)에 대한 모듈이 위치합니다.
 - 하위 네임스페이스에서 리소스를 추가하기 위해서 `extend_namespace`로 `Namespace`를 확장한 뒤 `add_resources` 메소드를 사용합니다.
-- `extend_namespace` 확장에 존재하는 `validate` 메소드는 `validator`에 따라 `ns.payload`의 필드를 검증합니다(실패 시 400).
   - `resources`는 `Resource`(리소스)에 대한 각각의 모듈을 가집니다.
   - `models`는 해당 네임스페이스의 리소스에서 사용하는 `Namespace.model`들을 가집니다.
+- `extend_namespace` 확장에 존재하는 `validate` 메소드는 `validator`에 따라 `ns.payload`의 필드를 검증합니다(실패 시 400).
+
+## Documentation
+
+### server
+
+#### `server.create_app()`
+Create `Flask` app and returns `_app`
+
+#### `server.mongo`
+Initialized `PyMongo`(from `flask-pymongo`)
+
+#### `server.common`
+Initialized `Common`(from `flask-common`) with `app`
+
+### server.namespaces
+
+#### `server.namespaces.extend_namespace`
+
+#### `server.namespaces.hash_password`
+
+#### `server.namespaces.api`
 
 ## App for management
 > Admin app with Vue.js
