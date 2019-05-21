@@ -10,6 +10,7 @@
 - `flask-restplus`: REST API 구축과 Swagger 문서화
 - `flask-pymongo`: MongoDB 데이터베이스 연동
 - `validators`: 데이터 검증
+- `gevent`: react asynchronous
 
 ### Structure
 
