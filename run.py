@@ -1,4 +1,12 @@
-from server import app, common
+from server import common
+from gevent.pywsgi import WSGIServer
 
 if __name__ == '__main__':
-    common.serve(host=app.config['HOST'], port=app.config['PORT'])
+    http = WSGIServer(
+        (
+            common.app.config['HOST'], 
+            common.app.config['PORT']
+        ), 
+        common.app.wsgi_app
+    )
+    http.serve_forever()
