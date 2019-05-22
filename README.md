@@ -1,4 +1,6 @@
 # JFlask
+<img alt="logo" src="./logo.png" width="256">
+
 > ❄️ JFlask: Template for Flask RESTful API and management
 
 ## Server
