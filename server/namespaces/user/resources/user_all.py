@@ -6,7 +6,7 @@ from flask import jsonify, request
 from server import mongo
 
 
-@user_ns.route('/all')
+@user_ns.route('/')
 class UserAll(Resource):
     @user_ns.marshal_list_with(user_model)
     @user_ns.doc(description='전체 사용자 목록을 가져옵니다(페이징).')

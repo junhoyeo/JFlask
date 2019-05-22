@@ -18,7 +18,7 @@ export default {
 
   methods: {
     getUsers () {
-      this.$api.get('/user/all')
+      this.$api.get('/user')
         .then((response) => {
           this.users = response.data
           this.tokens = Array(this.users.length).fill('')
