@@ -1,5 +1,5 @@
 # JFlask
-<img alt="logo" src="./logo.png" width="256" align="right">
+<img alt="logo" src="./logo.png?v=2" width="512" align="right">
 
 > ❄️ JFlask: Template for Flask RESTful API and management
 
